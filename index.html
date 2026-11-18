@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Gervi | Ginecólogo</title>
+<meta name="description" content="Dr. Gervi, ginecólogo. Agenda tu cita, escríbeme por WhatsApp, consulta la ubicación del consultorio y sígueme en redes.">
+<meta name="theme-color" content="#F7A9C8">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dr. Gervi | Ginecólogo">
+<meta property="og:description" content="Agenda tu cita, escríbeme por WhatsApp y encuentra el consultorio.">
+<meta property="og:locale" content="es_MX">
+
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/doctor.webp" type="image/webp">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<!--
+  ============================================================
+  PENDIENTES (busca "TODO" en este archivo):
+  1. Número de WhatsApp  -> 3 lugares: Escríbeme y Agendar cita (usan wa.me)
+  2. Usuario de TikTok
+  3. Dirección / enlace de Google Maps del consultorio
+  4. Cédula profesional
+  5. Flujo real de "Agendar cita" (por ahora abre WhatsApp con mensaje)
+  También editar contacto.vcf y cambiar assets/doctor.webp por la foto real.
+  ============================================================
+-->
+<main class="card">
+
+  <section class="hero" aria-label="Dr. Gervi">
+    <img class="hero__logo" src="assets/logo.webp" alt="" width="344" height="334">
+    <img class="hero__doctor" src="assets/doctor.webp" alt="Foto del Dr. Gervi" width="900" height="1440" fetchpriority="high">
+  </section>
+
+  <section class="panel" aria-label="Contacto">
+
+    <header class="panel__id">
+      <h1 class="panel__name">Dr. Gervi</h1>
+      <p class="panel__role">GINECÓLOGO</p>
+    </header>
+
+    <nav class="quick" aria-label="Guardar contacto y redes sociales">
+
+      <a class="quick__item" href="contacto.vcf" download="Dr-Gervi.vcf">
+        <span class="quick__icon">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M2 21a8 8 0 0 1 16 0"/><path d="M19 8v6M16 11h6"/></svg>
+        </span>
+        <span class="quick__label">Guardar</span>
+      </a>
+
+      <a class="quick__item" href="https://www.instagram.com/gervi.ginecologo/" target="_blank" rel="noopener">
+        <span class="quick__icon">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6"/></svg>
+        </span>
+        <span class="quick__label">Instagram</span>
+      </a>
+
+      <!-- TODO: cambiar USUARIO_TIKTOK por el usuario real -->
+      <a class="quick__item" href="https://www.tiktok.com/@USUARIO_TIKTOK" target="_blank" rel="noopener">
+        <span class="quick__icon">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.4 2.6 2 4.2 5 4.5"/></svg>
+        </span>
+        <span class="quick__label">TikTok</span>
+      </a>
+
+    </nav>
+
+    <!-- TODO: reemplazar por el enlace de Google Maps del consultorio
+         (en Google Maps: Compartir > Copiar enlace) -->
+    <a class="pill" href="https://www.google.com/maps/search/?api=1&amp;query=CONSULTORIO+DR+GERVI" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      Ubicación
+    </a>
+
+    <!-- TODO: cambiar 52XXXXXXXXXX por el número con lada de país (México: 52 + 10 dígitos) -->
+    <a class="pill" href="https://wa.me/52XXXXXXXXXX?text=Hola%20Dr.%20Gervi%2C%20me%20gustar%C3%ADa%20hacer%20una%20consulta." target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.6-4.8A8.5 8.5 0 1 1 8 19.6L3 21z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1-1.5-2-1-.8.8c-.8-.4-1.5-1.1-1.9-1.9l.8-.8-1-2L9 9.5z"/></svg>
+      Escríbeme
+    </a>
+
+    <!-- TODO: por ahora abre WhatsApp con un mensaje para agendar.
+         Cuando se defina el flujo real (agenda en línea, formulario, etc.), cambiar este enlace. -->
+    <a class="cta" href="https://wa.me/52XXXXXXXXXX?text=Hola%20Dr.%20Gervi%2C%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">Agendar cita</a>
+
+    <!-- TODO: poner el número de cédula profesional -->
+    <p class="panel__cedula">CÉD. PROF. [NÚMERO]</p>
+
+  </section>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,262 @@
+/* ==========================================================
+   Tarjeta digital Dr. Gervi
+   Mobile-first. Sin librerías ni fuentes externas.
+   ========================================================== */
+
+:root {
+  --pink-1: #F7A9C8;
+  --pink-2: #FBC6DE;
+  --pink-3: #FDE6F1;
+  --mauve: #A8527F;
+  --mauve-dark: #8E3F6A;
+  --mauve-bg: #FCE4F0;
+  --ink-soft: #6E5A67;
+  --blue-top: #3F7CC8;
+  --blue-bottom: #3C8FC4;
+  --focus: #3F7CC8;
+  --radius-panel: 32px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font);
+  color: var(--ink-soft);
+  background: var(--pink-2);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a { text-decoration: none; color: inherit; }
+
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- Tarjeta (pantalla completa en celular) ---------- */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--pink-1) 0%, var(--pink-2) 40%, var(--pink-3) 64%, #FFFFFF 84%);
+}
+
+/* ---------- Zona superior: logo + foto ---------- */
+
+.hero {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 300px;
+  max-height: min(125vw, 540px);
+  overflow: hidden;
+}
+
+.hero__logo {
+  position: absolute;
+  left: 8.7%;
+  top: 2%;
+  width: 78%;
+  height: auto;
+}
+
+/* La foto es más alta que la zona: el panel la tapa de la cintura para abajo */
+.hero__doctor {
+  position: absolute;
+  left: 20%;
+  top: 17%;
+  width: 72%;
+  height: auto;
+}
+
+/* ---------- Panel blanco ---------- */
+
+.panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: calc(var(--radius-panel) * -1) 20px max(18px, env(safe-area-inset-bottom));
+  padding: 20px 20px 14px;
+  background: #FFFFFF;
+  border-radius: var(--radius-panel);
+  box-shadow: 0 14px 34px rgba(120, 50, 90, 0.26);
+  animation: panel-in 0.5s ease-out both;
+}
+
+.panel__id { text-align: center; }
+
+.panel__name {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--mauve);
+}
+
+.panel__role {
+  margin: 2px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--ink-soft);
+}
+
+/* ---------- Íconos redondos: guardar, Instagram, TikTok ---------- */
+
+.quick {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.quick__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 76px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+}
+
+.quick__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--mauve-bg);
+  color: var(--mauve);
+}
+
+/* ---------- Botones en píldora ---------- */
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 250px;
+  height: 46px;
+  margin-top: 10px;
+  border-radius: 23px;
+  background: var(--mauve-bg);
+  color: var(--mauve-dark);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease;
+}
+
+.quick + .pill { margin-top: 16px; }
+
+/* ---------- Agendar cita (zona del pulgar) ---------- */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  height: 58px;
+  margin-top: 16px;
+  border-radius: 29px;
+  background: linear-gradient(180deg, var(--blue-top) 0%, var(--blue-bottom) 100%);
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 18px rgba(40, 70, 110, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.panel__cedula {
+  margin: 14px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+
+/* ---------- Estados al tocar ---------- */
+
+.quick__item:active,
+.pill:active { transform: scale(0.96); }
+
+.cta:active {
+  transform: scale(0.97);
+  box-shadow: 0 5px 10px rgba(40, 70, 110, 0.4);
+}
+
+@media (hover: hover) {
+  .quick__item:hover,
+  .pill:hover { transform: translateY(-1px); }
+  .cta:hover { transform: translateY(-1px); }
+}
+
+/* ---------- Animación de entrada ---------- */
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel { animation: none; }
+  .quick__item, .pill, .cta { transition: none; }
+}
+
+/* ---------- Pantallas bajitas (iPhone SE, modo horizontal) ---------- */
+
+@media (max-height: 700px) {
+  .panel { padding-top: 16px; }
+  .quick { margin-top: 12px; }
+  .pill { height: 44px; margin-top: 8px; }
+  .quick + .pill { margin-top: 12px; }
+  .cta { margin-top: 12px; height: 54px; }
+  .panel__cedula { margin-top: 10px; }
+}
+
+/* ---------- Computadora: la tarjeta se ve como un teléfono centrado ---------- */
+
+@media (min-width: 600px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0;
+    background: linear-gradient(180deg, var(--pink-2), var(--pink-3));
+  }
+
+  .card {
+    height: min(calc(100dvh - 48px), 880px);
+    border-radius: 36px;
+    box-shadow: 0 24px 60px rgba(120, 50, 90, 0.25);
+  }
+}
