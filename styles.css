@@ -14,7 +14,10 @@
   --blue-top: #3F7CC8;
   --blue-bottom: #3C8FC4;
   --focus: #3F7CC8;
-  --radius-panel: 32px;
+  /* Unidad de escala: 1 = diseño de 390 x 844 px. Se encoge en pantallas chicas o con zoom,
+     así todo el contenido (incluido el botón de agendar) cabe sin hacer scroll. */
+  --u: min(calc(100vw / 390), calc(100vh / 844));
+  --radius-panel: calc(30 * var(--u));
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
@@ -23,6 +26,10 @@
 *::after { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
+
+@supports (height: 100dvh) {
+  :root { --u: min(calc(100vw / 390), calc(100dvh / 844)); }
+}
 
 body {
   margin: 0;
@@ -53,7 +60,7 @@ a:focus-visible {
   max-width: 430px;
   height: 100vh;
   height: 100dvh;
-  min-height: 640px;
+  min-height: 520px;
   margin: 0 auto;
   overflow: hidden;
   background: linear-gradient(180deg, var(--pink-1) 0%, var(--pink-2) 40%, var(--pink-3) 64%, #FFFFFF 84%);
@@ -65,7 +72,7 @@ a:focus-visible {
   position: relative;
   flex: 1 1 auto;
   min-height: 300px;
-  max-height: min(125vw, 540px);
+  max-height: min(135vw, 580px);
   overflow: hidden;
 }
 
@@ -94,8 +101,8 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: calc(var(--radius-panel) * -1) 20px max(18px, env(safe-area-inset-bottom));
-  padding: 20px 20px 14px;
+  margin: calc(var(--radius-panel) * -1) calc(18 * var(--u)) max(calc(16 * var(--u)), env(safe-area-inset-bottom));
+  padding: calc(18 * var(--u)) calc(16 * var(--u)) calc(12 * var(--u));
   background: #FFFFFF;
   border-radius: var(--radius-panel);
   box-shadow: 0 14px 34px rgba(120, 50, 90, 0.26);
@@ -106,7 +113,7 @@ a:focus-visible {
 
 .panel__name {
   margin: 0;
-  font-size: 24px;
+  font-size: max(18px, calc(22 * var(--u)));
   line-height: 1.15;
   font-weight: 700;
   color: var(--mauve);
@@ -114,7 +121,7 @@ a:focus-visible {
 
 .panel__role {
   margin: 2px 0 0;
-  font-size: 11px;
+  font-size: max(10px, calc(10.5 * var(--u)));
   font-weight: 600;
   letter-spacing: 0.3em;
   color: var(--ink-soft);
@@ -124,19 +131,23 @@ a:focus-visible {
 
 .quick {
   display: flex;
-  justify-content: center;
-  gap: 18px;
-  margin-top: 16px;
+  justify-content: space-between;
+  gap: calc(6 * var(--u));
+  width: 100%;
+  margin-top: calc(14 * var(--u));
 }
 
+/* Los 3 ítems se reparten el ancho del panel: nunca se salen de él */
 .quick__item {
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 76px;
-  font-size: 11px;
+  gap: calc(5 * var(--u));
+  font-size: max(11px, calc(11 * var(--u)));
   font-weight: 500;
+  text-align: center;
   color: var(--ink-soft);
   transition: transform 0.15s ease;
 }
@@ -145,8 +156,8 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: max(38px, calc(44 * var(--u)));
+  height: max(38px, calc(44 * var(--u)));
   border-radius: 50%;
   background: var(--mauve-bg);
   color: var(--mauve);
@@ -158,22 +169,27 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 250px;
-  height: 46px;
-  margin-top: 10px;
-  border-radius: 23px;
+  gap: calc(9 * var(--u));
+  width: min(100%, calc(230 * var(--u)));
+  height: max(40px, calc(42 * var(--u)));
+  margin-top: calc(8 * var(--u));
+  border-radius: 999px;
   background: var(--mauve-bg);
   color: var(--mauve-dark);
-  font-size: 16px;
+  font-size: max(13px, calc(14.5 * var(--u)));
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: transform 0.15s ease;
 }
 
-.quick + .pill { margin-top: 16px; }
+.pill svg {
+  flex: none;
+  width: max(17px, calc(20 * var(--u)));
+  height: auto;
+}
+
+.quick + .pill { margin-top: calc(14 * var(--u)); }
 
 /* ---------- Agendar cita (zona del pulgar) ---------- */
 
@@ -181,24 +197,38 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 320px;
-  height: 58px;
-  margin-top: 16px;
-  border-radius: 29px;
+  position: relative;
+  isolation: isolate;
+  width: min(100%, calc(290 * var(--u)));
+  height: max(46px, calc(52 * var(--u)));
+  margin-top: calc(20 * var(--u));
+  border-radius: 999px;
   background: linear-gradient(180deg, var(--blue-top) 0%, var(--blue-bottom) 100%);
   color: #FFFFFF;
-  font-size: 20px;
+  font-size: max(15px, calc(18 * var(--u)));
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  box-shadow: 0 10px 18px rgba(40, 70, 110, 0.4);
+  box-shadow: 0 0 16px rgba(80, 150, 215, 0.55), 0 8px 16px rgba(40, 70, 110, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* Glow: copia del botón, desenfocada, detrás y con un pulso suave */
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 5px -2px -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #5AA0E8 0%, #4CB0DC 100%);
+  filter: blur(12px);
+  opacity: 0.65;
+  animation: glow 2.6s ease-in-out infinite;
+}
+
 .panel__cedula {
-  margin: 14px 0 0;
-  font-size: 11px;
+  margin: calc(12 * var(--u)) 0 0;
+  font-size: max(10px, calc(10.5 * var(--u)));
   font-weight: 600;
   letter-spacing: 0.18em;
   color: var(--ink-soft);
@@ -227,25 +257,22 @@ a:focus-visible {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .panel { animation: none; }
-  .quick__item, .pill, .cta { transition: none; }
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.85; }
 }
 
-/* ---------- Pantallas bajitas (iPhone SE, modo horizontal) ---------- */
-
-@media (max-height: 700px) {
-  .panel { padding-top: 16px; }
-  .quick { margin-top: 12px; }
-  .pill { height: 44px; margin-top: 8px; }
-  .quick + .pill { margin-top: 12px; }
-  .cta { margin-top: 12px; height: 54px; }
-  .panel__cedula { margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) {
+  .panel { animation: none; }
+  .cta::before { animation: none; }
+  .quick__item, .pill, .cta { transition: none; }
 }
 
 /* ---------- Computadora: la tarjeta se ve como un teléfono centrado ---------- */
 
 @media (min-width: 600px) {
+  :root { --u: min(1.05px, calc((100vh - 48px) / 844)); }
+
   body {
     display: flex;
     align-items: center;
